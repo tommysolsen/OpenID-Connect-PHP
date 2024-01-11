@@ -2051,6 +2051,7 @@ class OpenIDConnectClient
 
     protected function setSessionKey($key, $value) {
         session()->put($key, $value);
+        session()->save();
     }
 
     protected function unsetSessionKey($key) {
