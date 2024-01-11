@@ -2037,36 +2037,24 @@ class OpenIDConnectClient
      * Use session to manage a nonce
      */
     protected function startSession() {
-        if (session_status() === PHP_SESSION_NONE) {
-            @session_start();
-        }
     }
 
     protected function commitSession() {
-        $this->startSession();
-
-        session_write_close();
     }
 
     protected function getSessionKey($key) {
-        $this->startSession();
-
-        if (array_key_exists($key, $_SESSION)) {
-            return $_SESSION[$key];
+        if(session()->has($key)) {
+            return session()->get($key);
         }
         return false;
     }
 
     protected function setSessionKey($key, $value) {
-        $this->startSession();
-
-        $_SESSION[$key] = $value;
+        session()->put($key, $value);
     }
 
     protected function unsetSessionKey($key) {
-        $this->startSession();
-
-        unset($_SESSION[$key]);
+        session()->remove($key);
     }
 
     protected function getJWTClientAssertion($aud) {
