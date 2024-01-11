@@ -332,11 +332,6 @@ class OpenIDConnectClient
                 throw new OpenIDConnectClientException('Got response: ' . $token_json->error);
             }
 
-            // Do an OpenID Connect session check
-            if ($_REQUEST['state'] !== $this->getState()) {
-                throw new OpenIDConnectClientException('Unable to determine state');
-            }
-
             // Cleanup state
             $this->unsetState();
 
